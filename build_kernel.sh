@@ -24,5 +24,7 @@ make -j4 O=./obj/KERNEL_OBJ/
 ##############################################################################
 # Copy Kernel Image
 ##############################################################################
-cp -f ./obj/KERNEL_OBJ/arch/arm/boot/zImage .
+cp -f ./obj/KERNEL_OBJ/arch/arm/boot/zImage ./obj/
+cp -f ./obj/KERNEL_OBJ/drivers/net/wireless/bcm4330_b2/wlan.ko ./obj/
+cp -f ./obj/KERNEL_OBJ/drivers/scsi/scsi_wait_scan.ko ./obj/
 
