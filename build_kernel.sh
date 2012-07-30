@@ -4,20 +4,21 @@
 #                           Kernel Build Script 
 #
 ###############################################################################
+# 2012-07-30 xuefy        : modified
 # 2011-10-24 effectivesky : modified
 # 2010-12-29 allydrop     : created
 ###############################################################################
 ##############################################################################
 # set toolchain
 ##############################################################################
-# export ARCH=arm
-# export CROSS_COMPILE=$PWD/../prebuilt_apq8060/linux-x86/toolchain/arm-eabi-4.4.0/bin/arm-eabi-
+export ARCH=arm
+export CROSS_COMPILE=/home/xuefy/android/cm_gb/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-
 
 ##############################################################################
 # make zImage
 ##############################################################################
 mkdir -p ./obj/KERNEL_OBJ/
-make O=./obj/KERNEL_OBJ/ msm8660-perf-EF65L_TP20_defconfig
+make O=./obj/KERNEL_OBJ/ ef65l_defconfig
 make -j4 O=./obj/KERNEL_OBJ/
 
 ##############################################################################
