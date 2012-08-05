@@ -3501,8 +3501,8 @@ static int writeback_offset(void)
 	return MSM_FB_WRITEBACK_OFFSET;
 }
 
-#define MSM_PMEM_KERNEL_EBI1_SIZE  0x600000
-#define MSM_PMEM_ADSP_SIZE         0x2000000
+#define MSM_PMEM_KERNEL_EBI1_SIZE  0x700000
+#define MSM_PMEM_ADSP_SIZE         0x3000000  /* 48 MB */
 #define MSM_PMEM_AUDIO_SIZE        0x279000
 
 #define MSM_SMI_BASE          0x38000000
@@ -3512,7 +3512,7 @@ static int writeback_offset(void)
 /* SMI PMEM Region, as the video core will use offset address */
 /* from the Firmware base */
 #define PMEM_KERNEL_SMI_BASE  (MSM_SMI_BASE)
-#define PMEM_KERNEL_SMI_SIZE  0x600000
+#define PMEM_KERNEL_SMI_SIZE  0xc00000
 /* User space SMI PMEM Region for video core*/
 /* used for encoder, decoder input & output buffers  */
 #define MSM_PMEM_SMIPOOL_BASE (PMEM_KERNEL_SMI_BASE + PMEM_KERNEL_SMI_SIZE)
@@ -3704,18 +3704,20 @@ static struct msm_bus_scale_pdata smi_client_pdata = {
 	.name = "pmem_smi",
 };
 
-void pmem_request_smi_region(void *data)
+int pmem_request_smi_region(void *data)
 {
 	int bus_id = (int) data;
 
 	msm_bus_scale_client_update_request(bus_id, 1);
+	return 0;
 }
 
-void pmem_release_smi_region(void *data)
+int pmem_release_smi_region(void *data)
 {
 	int bus_id = (int) data;
 
 	msm_bus_scale_client_update_request(bus_id, 0);
+	return 0;
 }
 
 void *pmem_setup_smi_region(void)
